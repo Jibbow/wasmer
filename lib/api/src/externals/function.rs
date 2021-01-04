@@ -75,7 +75,7 @@ fn build_export_function_metadata<Env>(
     ) -> Result<(), crate::HostEnvInitError>,
 ) -> (*mut std::ffi::c_void, ExportFunctionMetadata)
 where
-    Env: Clone + Sized + 'static + Send + Sync,
+    Env: Clone + Sized + Send + Sync,
 {
     let import_init_function_ptr = Some(unsafe {
         std::mem::transmute::<fn(_, _) -> Result<(), _>, fn(_, _) -> Result<(), _>>(
@@ -378,7 +378,7 @@ impl Function {
         F: HostFunction<Args, Rets, WithEnv, Env>,
         Args: WasmTypeList,
         Rets: WasmTypeList,
-        Env: Sized + WasmerEnv + 'static,
+        Env: Sized + WasmerEnv,
     {
         if std::mem::size_of::<F>() != 0 {
             Self::closures_unsupported_panic();
